@@ -56,7 +56,7 @@ let validateListing = (req, res, next) => {
   }
 };
 
-// create route
+// create route hai ye
 app.post("/listings", validateListing, async (req, res) => {
   // let result = ListingSchema.validate(req.body);
   // console.log(result);
