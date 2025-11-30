@@ -1,0 +1,46 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Listing</title>
+    <link rel="stylesheet" href="/styleSheets/new.css" />
+  </head>
+  <body>
+    <% layout('/layouts/boilerplate') -%>
+    <h1>Create a New Listing</h1>
+
+    <form autocomplete="off" action="/listings" method="post" class="form">
+      <label>Title</label>
+      <input type="text" name="title" placeholder="Add a catchy title" />
+
+      <label>Description</label>
+      <textarea
+        name="description"
+        placeholder="Write something interesting..."
+      ></textarea>
+
+      <label>Image Link</label>
+      <input type="text" name="image" placeholder="Enter image URL/link" />
+
+      <div class="row">
+        <div class="half">
+          <label>Price</label>
+          <input type="number" name="price" placeholder="1200" />
+        </div>
+
+        <div class="half">
+          <label>Country</label>
+          <input type="text" name="country" placeholder="India" />
+        </div>
+      </div>
+
+      <label>Location</label>
+      <input type="text" name="location" placeholder="Jaipur, Rajasthan" />
+
+      <button type="submit" class="btn">Add</button>
+    </form>
+  </body>
+</html>

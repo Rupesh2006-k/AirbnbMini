@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Listing Details</title>
+    <link rel="stylesheet" href="/styleSheets/show.css" />
+  </head>
+
+  <body>
+    <%- include('../includes/navbar.ejs') %>
+    <div class="container">
+      <h1 class="page-title">Listing Details</h1>
+
+      <!-- Image -->
+      <div class="img-box">
+        <img src="<%= listingDetail.image %>" alt="Listing Image">
+      </div>
+
+      <!-- Details -->
+      <div class="details-card">
+
+        <h2 class="title"><%= listingDetail.title %></h2>
+
+        <p class="description"><%= listingDetail.description %></p>
+
+        <div class="info">
+          <p><strong>Location:</strong> <%= listingDetail.location %></p>
+          <p><strong>Country:</strong> <%= listingDetail.country %></p>
+          <p><strong>Price:</strong> ₹ <%= Number(listingDetail.price).toLocaleString('en-IN') %></p>
+        </div>
+
+      </div>
+
+      <!-- Buttons -->
+      <div class="btn-group">
+        <a href="/listings/<%= listingDetail._id %>/edit" class="btn edit">Edit Listing</a>
+
+        <form action="/listings/<%= listingDetail._id %>?_method=DELETE" method="POST">
+          <button class="btn delete">Delete Listing</button>
+        </form>
+      </div>
+    </div>
+    <%- include('../includes/footer.ejs') %>
+
+  </body>
+</html>

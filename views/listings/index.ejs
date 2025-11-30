@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/styleSheets/style.css" />
+  </head>
+
+  <body>
+    <% layout('/layouts/boilerplate') -%>
+
+
+    <div class="cards-container">
+      <% for (let elem of listing) { %>
+      <div class="card">
+        <img src="<%= elem.image %>" alt="<%= elem.title %>" />
+
+        <div class="card-content">
+          <h2><%= elem.title %></h2>
+
+          <p><%= elem.description.substring(0, 60) %>...</p>
+
+          <a href="/listings/<%= elem._id %>" class="view-btn">
+            View Details
+          </a>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </body>
+</html>

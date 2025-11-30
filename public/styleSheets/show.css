@@ -1,0 +1,113 @@
+/* Page layout */
+body {
+  font-family: "Inter", sans-serif;
+  background: #f7f7f7;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* Card container */
+.container {
+  width: 700px;
+  background: #fff;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* Title */
+.page-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #111;
+}
+
+/* Image */
+.img-box {
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 16px;
+  margin-bottom: 25px;
+  background: #eee;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Details card */
+.details-card {
+  background: #fafafa;
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid #ececec;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.description {
+  font-size: 16px;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+/* Info section */
+.info p {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.info strong {
+  color: #111;
+}
+
+/* Buttons */
+.btn-group {
+  display: flex;
+  gap: 15px;
+}
+
+.btn {
+  padding: 12px 20px;
+  font-size: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: 0.2s ease;
+}
+
+/* Edit button */
+.edit {
+  background: #111;
+  color: #fff;
+}
+
+.edit:hover {
+  background: #333;
+}
+
+/* Delete button */
+.delete {
+  background: #ff4747;
+  color: white;
+  border: none;
+}
+
+.delete:hover {
+  background: #d93636;
+}

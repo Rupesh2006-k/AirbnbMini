@@ -1,0 +1,82 @@
+/* whole page */
+body {
+  font-family: "Inter", sans-serif;
+  background: #fafafa;
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* center form card */
+.container {
+  width: 600px;
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 18px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 25px;
+  font-weight: 600;
+  color: #111;
+}
+
+/* label styling */
+label {
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* inputs + textareas */
+input,
+textarea {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1.5px solid #ddd;
+  font-size: 15px;
+  background: #f9f9f9;
+  transition: 0.2s ease;
+}
+
+/* focus effect */
+input:focus,
+textarea:focus {
+  border-color: #000;
+  background: #fff;
+  outline: none;
+}
+
+/* textarea size */
+textarea {
+  height: 50px;
+  resize: none;
+}
+
+/* spacing between fields */
+input,
+textarea {
+  margin-bottom: 18px;
+}
+
+/* button styling */
+.btn {
+  width: 160px;
+  padding: 12px;
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  background: #333;
+}
