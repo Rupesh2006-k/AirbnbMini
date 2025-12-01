@@ -1,4 +1,5 @@
-
+/** @format */
+let reviewModel = require("./reviews.model");
 let mongoose = require("mongoose");
 
 let listingSchema = new mongoose.Schema({
@@ -11,9 +12,13 @@ let listingSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    set: (v) => (v === "" ? "https://plus.unsplash.com/premium_photo-1661964071015-d97428970584?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWx8ZW58MHx8MHx8fDA%3D" : v),
-    default:'https://plus.unsplash.com/premium_photo-1661964071015-d97428970584?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aG90ZWx8ZW58MHx8MHx8fDA%3D'  
-},
+    set: (v) =>
+      v === ""
+        ? "https://plus.unsplash.com/premium_photo-1661964071015-d97428970584?w=600&auto=format&fit=crop&q=60"
+        : v,
+    default:
+      "https://plus.unsplash.com/premium_photo-1661964071015-d97428970584?w=600&auto=format&fit=crop&q=60",
+  },
   price: {
     type: Number,
     require: true,
@@ -26,6 +31,18 @@ let listingSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  reviews: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "review",
+    },
+  ],
+});
+
+listingSchema.post("findOneAndDelete", async (listing) => {
+  if (listing) {
+    await reviewModel.deleteMany({ _id: { $in: listing.reviews } });
+  }
 });
 
 let ListingModel = mongoose.model("Listing", listingSchema);

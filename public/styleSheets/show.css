@@ -1,98 +1,106 @@
-/* Page layout */
+/* =======================================
+   GLOBAL PAGE
+======================================= */
 body {
   font-family: "Inter", sans-serif;
-  background: #f7f7f7;
+  background: #f2f2f2;
   display: flex;
   justify-content: center;
   padding: 40px;
+  color: #222;
 }
 
-/* Card container */
+/* Main container */
 .container {
-  width: 700px;
+  width: 750px;
   background: #fff;
   padding: 35px;
-  border-radius: 18px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
 }
 
-/* Title */
-.page-title {
-  text-align: center;
+/* Page title */
+.title {
   font-size: 32px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 25px;
   color: #111;
+  text-align: center;
 }
 
-/* Image */
+/* =======================================
+   IMAGE BOX
+======================================= */
 .img-box {
   width: 100%;
-  height: 350px;
+  height: 360px;
+  border-radius: 18px;
   overflow: hidden;
-  border-radius: 16px;
   margin-bottom: 25px;
-  background: #eee;
+  background: #e5e5e5;
 }
 
 .img-box img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: 0.3s ease;
 }
 
-/* Details card */
+.img-box img:hover {
+  transform: scale(1.05);
+}
+
+/* =======================================
+   DETAILS CARD
+======================================= */
 .details-card {
   background: #fafafa;
   padding: 25px;
   border-radius: 16px;
-  border: 1px solid #ececec;
-  margin-bottom: 30px;
-}
-
-.title {
-  font-size: 26px;
-  font-weight: 600;
-  color: #111;
-  margin-bottom: 12px;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 35px;
 }
 
 .description {
   font-size: 16px;
+  line-height: 1.7;
   color: #444;
-  line-height: 1.6;
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
-/* Info section */
 .info p {
-  margin-bottom: 10px;
   font-size: 16px;
-  color: #333;
+  margin-bottom: 10px;
 }
 
 .info strong {
   color: #111;
+  font-weight: 600;
 }
 
-/* Buttons */
+/* =======================================
+   BUTTONS
+======================================= */
 .btn-group {
   display: flex;
   gap: 15px;
+  margin-bottom: 40px;
 }
 
 .btn {
-  padding: 12px 20px;
+  padding: 12px 22px;
+  border-radius: 12px;
   font-size: 15px;
-  border-radius: 10px;
-  cursor: pointer;
   text-decoration: none;
-  display: inline-block;
+  cursor: pointer;
   transition: 0.2s ease;
 }
 
-/* Edit button */
+/* Edit Button */
 .edit {
+  width: 80px;
+  height: 20px;
   background: #111;
   color: #fff;
 }
@@ -101,13 +109,155 @@ body {
   background: #333;
 }
 
-/* Delete button */
+/* Delete Button */
 .delete {
-  background: #ff4747;
-  color: white;
+  background: #ff4c4c;
+  color: #fff;
   border: none;
 }
 
 .delete:hover {
   background: #d93636;
+}
+
+/* =======================================
+   REVIEW FORM
+======================================= */
+.review-form {
+  background: #fafafa;
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid #e6e6e6;
+}
+
+.review-form h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 22px;
+}
+
+.review-form label {
+  font-size: 15px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.review-form input[type="range"] {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.review-form textarea {
+  width: 100%;
+  height: 130px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  font-size: 15px;
+  resize: none;
+  outline: none;
+}
+
+.review-form textarea:focus {
+  border-color: #111;
+}
+
+/* Submit Button */
+.submit-btn {
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+form {
+  background: #fafafa;
+  padding: 25px;
+  border-radius: 16px;
+  border: 1px solid #e6e6e6;
+  margin-bottom: 35px;
+}
+
+form label {
+  font-size: 15px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 8px;
+}
+
+form input[type="range"] {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+form textarea {
+  width: 100%;
+  height: 130px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  font-size: 15px;
+  resize: none;
+  outline: none;
+}
+
+form textarea:focus {
+  border-color: #111;
+}
+
+/* Submit Button */
+form button {
+  background: #111;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+form button:hover {
+  background: #333;
+  transform: translateY(-2px);
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid #e5e5e5;
+  margin-bottom: 20px;
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-3px);
+}
+
+.card h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+.card p {
+  font-size: 15px;
+  color: #555;
+  line-height: 1.5;
 }

@@ -1,5 +1,4 @@
 /** @format */
-
 let wrapAsync = require("./utils/wrapAsync");
 const express = require("express");
 const app = express();
@@ -26,8 +25,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/", (req, res) => {
   res.send("Hello World!");
 });
-
-// listing index
+// listing
 app.get(
   "/listings",
   wrapAsync(async (req, res) => {
@@ -36,12 +34,12 @@ app.get(
   }),
 );
 
-// new listing form
-app.get("/listings/new", (req, res) => {
+// new route
+app.get("/listings/new", async (req, res) => {
   res.render("listings/new.ejs");
 });
 
-// listing show
+// new show
 app.get("/listings/:id", async (req, res) => {
   let { id } = req.params;
   let listingDetail = await ListingModel.findById(id).populate("reviews");
@@ -49,7 +47,6 @@ app.get("/listings/:id", async (req, res) => {
   res.render("listings/show.ejs", { listingDetail });
 });
 
-// validate listing
 let validateListing = (req, res, next) => {
   let { error } = ListingSchema.validate(req.body);
   if (error) {
@@ -60,34 +57,54 @@ let validateListing = (req, res, next) => {
   }
 };
 
-// create listing
+// create route hai ye
 app.post("/listings", validateListing, async (req, res) => {
+  // let result = ListingSchema.validate(req.body);
+  // console.log(result);
+  // if (result.error) {
+  //   throw new ExpressError(400, result.error);
+  // }
+
   let newList = await ListingModel.create(req.body);
+
+  // if (!newList.title) {
+  //   throw new ExpressError(400, "titil is meassing ");
+  // }
+  // if (!newList.description) {
+  //   throw new ExpressError(400, "discription is meassing ");
+  // }
+  // if (!newList.location) {
+  //   throw new ExpressError(400, "location is meassing ");
+  // }
+  // if (!newList.country) {
+  //   throw new ExpressError(400, "country  is meassing ");
+  // }
   res.redirect("/listings");
 });
 
-// edit listing page
+// edit route
 app.get("/listings/:id/edit", async (req, res) => {
   let { id } = req.params;
   let leastingEdit = await ListingModel.findById(id);
   res.render("listings/edit.ejs", { leastingEdit });
 });
 
-// update listing
+// eidt or upladte route
 app.put("/listings/:id", validateListing, async (req, res) => {
   let { id } = req.params;
-  await ListingModel.findByIdAndUpdate(id, req.body);
+  let ans = await ListingModel.findByIdAndUpdate(id, req.body);
   res.redirect(`/listings/${id}`);
 });
 
-// delete listing
+// Delete route
+
 app.delete("/listings/:id", async (req, res) => {
   const { id } = req.params;
-  await ListingModel.findByIdAndDelete(id);
+  let ans = await ListingModel.findByIdAndDelete(id);
+  console.log(ans);
   res.redirect("/listings");
 });
 
-// review validation
 let validateReviews = (req, res, next) => {
   let { error } = reviewSchema.validate(req.body);
   if (error) {
@@ -98,51 +115,30 @@ let validateReviews = (req, res, next) => {
   }
 };
 
-// ⭐⭐⭐ FIXED REVIEW ROUTE ⭐⭐⭐
+// reviews
 app.post(
-  "/listings/:id/reviews",
+  "/listing/:id/reviews",
   validateReviews,
   wrapAsync(async (req, res) => {
-    let listing = await ListingModel.findById(req.params.id);
+    let lesting = ListingModel.findById(req.params.id);
+    let review = ReviewModel(req.body.review);
 
-    let review = new ReviewModel(req.body.review);
-
-    listing.reviews.push(review);
+    lesting.reviews.push(review);
 
     await review.save();
-    await listing.save();
+    await lesting.save();
 
     console.log("new review is added");
-
     res.redirect(`/listings/${listing._id}`);
   }),
 );
 
-// review delete
-// DELETE Review
-app.delete(
-  "/listings/:id/reviews/:reviewId",
-  wrapAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-
-    await ListingModel.findByIdAndUpdate(id, {
-      $pull: { reviews: reviewId },
-    });
-
-    await ReviewModel.findByIdAndDelete(reviewId);
-
-    res.redirect(`/listings/${id}`);
-  })
-);
-
-
-
 app.use((req, res, next) => {
-  next(new ExpressError(404, "page not found"));
+  next(new ExpressError(404, "page  not found"));
 });
 
 app.use((err, req, res, next) => {
-  let { statusCode = 500, message = "Something went wrong" } = err;
+  let { statusCode = 500, message = "Some thing went wrong" } = err;
   res.status(statusCode).render("listings/error.ejs", { message });
 });
 

@@ -1,3 +1,5 @@
+<!-- @format -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,38 +12,85 @@
   <body>
     <%- include('../includes/navbar.ejs') %>
     <div class="container">
-      <h1 class="page-title">Listing Details</h1>
+      <h2 class="title"><%= listingDetail.title %></h2>
 
       <!-- Image -->
       <div class="img-box">
-        <img src="<%= listingDetail.image %>" alt="Listing Image">
+        <img src="<%= listingDetail.image %>" alt="Listing Image" />
       </div>
 
       <!-- Details -->
       <div class="details-card">
-
-        <h2 class="title"><%= listingDetail.title %></h2>
-
         <p class="description"><%= listingDetail.description %></p>
 
         <div class="info">
           <p><strong>Location:</strong> <%= listingDetail.location %></p>
           <p><strong>Country:</strong> <%= listingDetail.country %></p>
-          <p><strong>Price:</strong> ₹ <%= Number(listingDetail.price).toLocaleString('en-IN') %></p>
+          <p>
+            <strong>Price:</strong> ₹ <%=
+            Number(listingDetail.price).toLocaleString('en-IN') %>
+          </p>
         </div>
-
       </div>
 
       <!-- Buttons -->
       <div class="btn-group">
-        <a href="/listings/<%= listingDetail._id %>/edit" class="btn edit">Edit Listing</a>
+        <a href="/listings/<%= listingDetail._id %>/edit" class="btn edit"
+          >Edit Listing</a
+        >
 
-        <form action="/listings/<%= listingDetail._id %>?_method=DELETE" method="POST">
+        <form
+          action="/listings/<%= listingDetail._id %>?_method=DELETE"
+          method="POST"
+        >
           <button class="btn delete">Delete Listing</button>
         </form>
       </div>
+
+      <div>
+        <form action="/listings/<%=listingDetail._id%>/reviews" method="post">
+          <div>
+            <label for="rating">Rating</label>
+            <input
+              type="range"
+              min="1"
+              max="5"
+              name="review[rating]"
+              id="rating"
+            />
+          </div>
+
+          <div>
+            <label for="comment">comments</label>
+            <textarea name="review[comment]" id="comment"></textarea>
+          </div>
+
+          <button>Submit</button>
+        </form>
+      </div>
+      <div>
+        <h1>All Reviews</h1>
+        <ul>
+          <% for (let review of listingDetail.reviews) { %>
+          <li>
+            <div class="card">
+              <h3><%= review.author?.username || "Anonymous" %></h3>
+
+              <p><%= review.rating %> stars</p>
+              <p><%= review.comment %></p>
+
+              <form
+                action="/listings/<%= listingDetail._id %>/reviews/<%= review._id %>?_method=DELETE"
+                method="POST"
+              >
+                <button class="delete">Delete</button>
+              </form>
+            </div>
+          </li>
+          <% } %>
+        </ul>
+      </div>
     </div>
     <%- include('../includes/footer.ejs') %>
-
   </body>
 </html>
