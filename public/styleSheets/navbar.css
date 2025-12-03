@@ -1,61 +1,129 @@
-/* --- Navbar Base --- */
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: white;
-  border-bottom: 1px solid #ddd;
-  z-index: 1000;
+/* ----- BASIC RESET ----- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
 }
 
-/* --- Container --- */
-.nav-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 12px 20px;
+/* ----- NAVBAR ----- */
+.navbar {
+  width: 100%;
+  padding: 15px 40px;
+  background: #ffffff;
+  border-bottom: 1px solid #eeeeee;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
-/* --- Brand --- */
+/* Left Section (Brand + Links) */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
 .nav-brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  cursor: pointer;
+  text-decoration: none;
 }
 
 .nav-brand img {
-  height: 28px;
+  width: 35px;
+  height: 35px;
 }
 
 .nav-brand span {
   font-size: 20px;
-  font-weight: 600;
-  color: #333;
+  font-weight: 700;
+  color: #111;
 }
 
-/* --- Links --- */
+/* Navbar Links */
 .nav-links {
   display: flex;
-  gap: 30px;
+  align-items: center;
+  gap: 25px;
   list-style: none;
 }
 
-.nav-links a {
+.nav-links li a {
   text-decoration: none;
+  color: #333;
   font-size: 16px;
-  color: #444;
-  transition: 0.25s;
+  transition: 0.2s ease;
 }
 
-.nav-links a:hover {
-  color: #0077ff;
+.nav-links li a:hover {
+  color: #000;
+  font-weight: 600;
 }
 
-/* --- Body content ko navbar se niche push karne ke liye --- */
-body {
-  padding-top: 70px; /* navbar height */
+/* ----- Right Buttons (Login/Signup/Logout) ----- */
+.nav-right ul {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  list-style: none;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  border: 1px solid #aaa;
+  color: #333;
+  transition: 0.2s ease;
+}
+
+.btn:hover {
+  background: #f2f2f2;
+}
+
+.btn-primary {
+  background: #6366f1;
+  border-color: #6366f1;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #4f46e5;
+}
+
+.btn-danger {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #dc2626;
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .nav-left {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .nav-links {
+    gap: 15px;
+  }
+
+  .nav-right ul {
+    gap: 10px;
+  }
 }

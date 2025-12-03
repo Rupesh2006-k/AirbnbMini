@@ -1,149 +1,86 @@
 /** @format */
 
-let wrapAsync = require("./utils/wrapAsync");
 const express = require("express");
 const app = express();
 const port = 3000;
 require("dotenv").config();
-let connectDB = require("./config/db");
-const ListingModel = require("./models/listing.models");
-connectDB();
-let path = require("path");
+
+const connectDB = require("./config/db");
+const path = require("path");
 const methodOverride = require("method-override");
-app.use(methodOverride("_method"));
-let ejsMate = require("ejs-mate");
-let ExpressError = require("./utils/ExpressError");
-const { ListingSchema, reviewSchema } = require("./schema");
-let ReviewModel = require("./models/reviews.model");
+const ejsMate = require("ejs-mate");
+const ExpressError = require("./utils/ExpressError");
+const listingRouter = require("./routes/listing.routes");
+const reviewsRouter = require("./routes/reviews.routes");
+const cookieParser = require("cookie-parser");
+let session = require("express-session");
+const flash = require("connect-flash");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const UserModel = require("./models/user.model");
+let UserRouter = require('./routes/user.routes')
+connectDB();
+
+let sessionOptions = {
+  secret: "kuchKhasBatHai",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
+    httpOnly: true,
+  },
+};
+// Middleware
 
 app.engine("ejs", ejsMate);
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride("_method"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(cookieParser("code"));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "public")));
 
+app.use(session(sessionOptions));
+app.use(flash());
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(UserModel.authenticate()));
+
+passport.serializeUser(UserModel.serializeUser());
+passport.deserializeUser(UserModel.deserializeUser());
+
+// Routes
 app.get("/", (req, res) => {
-  res.send("Hello World!");
+  res.send(`Hello world`);
 });
 
-// listing index
-app.get(
-  "/listings",
-  wrapAsync(async (req, res) => {
-    const listing = await ListingModel.find();
-    res.render("listings/index.ejs", { listing });
-  }),
-);
-
-// new listing form
-app.get("/listings/new", (req, res) => {
-  res.render("listings/new.ejs");
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
+  res.locals.currUser = req.user
+  next();
 });
 
-// listing show
-app.get("/listings/:id", async (req, res) => {
-  let { id } = req.params;
-  let listingDetail = await ListingModel.findById(id).populate("reviews");
-
-  res.render("listings/show.ejs", { listingDetail });
-});
-
-// validate listing
-let validateListing = (req, res, next) => {
-  let { error } = ListingSchema.validate(req.body);
-  if (error) {
-    let errMsg = error.details.map((val) => val.message).join(",");
-    throw new ExpressError(400, errMsg);
-  } else {
-    next();
-  }
-};
-
-// create listing
-app.post("/listings", validateListing, async (req, res) => {
-  let newList = await ListingModel.create(req.body);
-  res.redirect("/listings");
-});
-
-// edit listing page
-app.get("/listings/:id/edit", async (req, res) => {
-  let { id } = req.params;
-  let leastingEdit = await ListingModel.findById(id);
-  res.render("listings/edit.ejs", { leastingEdit });
-});
-
-// update listing
-app.put("/listings/:id", validateListing, async (req, res) => {
-  let { id } = req.params;
-  await ListingModel.findByIdAndUpdate(id, req.body);
-  res.redirect(`/listings/${id}`);
-});
-
-// delete listing
-app.delete("/listings/:id", async (req, res) => {
-  const { id } = req.params;
-  await ListingModel.findByIdAndDelete(id);
-  res.redirect("/listings");
-});
-
-// review validation
-let validateReviews = (req, res, next) => {
-  let { error } = reviewSchema.validate(req.body);
-  if (error) {
-    let errMsg = error.details.map((val) => val.message).join(",");
-    throw new ExpressError(400, errMsg);
-  } else {
-    next();
-  }
-};
-
-// ⭐⭐⭐ FIXED REVIEW ROUTE ⭐⭐⭐
-app.post(
-  "/listings/:id/reviews",
-  validateReviews,
-  wrapAsync(async (req, res) => {
-    let listing = await ListingModel.findById(req.params.id);
-
-    let review = new ReviewModel(req.body.review);
-
-    listing.reviews.push(review);
-
-    await review.save();
-    await listing.save();
-
-    console.log("new review is added");
-
-    res.redirect(`/listings/${listing._id}`);
-  }),
-);
-
-// review delete
-// DELETE Review
-app.delete(
-  "/listings/:id/reviews/:reviewId",
-  wrapAsync(async (req, res) => {
-    const { id, reviewId } = req.params;
-
-    await ListingModel.findByIdAndUpdate(id, {
-      $pull: { reviews: reviewId },
-    });
-
-    await ReviewModel.findByIdAndDelete(reviewId);
-
-    res.redirect(`/listings/${id}`);
-  })
-);
 
 
 
+app.use("/listings", listingRouter);
+app.use("/listings", reviewsRouter);
+app.use("/", UserRouter);
+
+// 404 Handler
 app.use((req, res, next) => {
   next(new ExpressError(404, "page not found"));
 });
 
+// Global Error Handler
 app.use((err, req, res, next) => {
-  let { statusCode = 500, message = "Something went wrong" } = err;
+  const { statusCode = 500, message = "Something went wrong" } = err;
   res.status(statusCode).render("listings/error.ejs", { message });
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+// Start server
+app.listen(port, () => console.log(`Server running at ${port}`));

@@ -6,20 +6,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="/styleSheets/navbar.css">
+    <link rel="stylesheet" href="/styleSheets/navbar.css" />
   </head>
+
   <body>
     <nav class="navbar">
-      <div class="nav-container">
-        <a class="nav-brand">
+      <div class="nav-left">
+        <a class="nav-brand" href="/listings">
           <img src="https://flowbite.com/docs/images/logo.svg" alt="Logo" />
-          <span>Flowbite</span>
+          <span>Hottles</span>
         </a>
 
         <ul class="nav-links">
           <li><a href="/">Home</a></li>
           <li><a href="/listings">All Listings</a></li>
-          <li><a href="/listings/new">Add new Listing</a></li>
+          <li><a href="/listings/new">Add New Listing</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-right">
+        <ul>
+          <% if(!currUser){ %>
+          <li><a href="/login" class="btn">Login</a></li>
+          <li><a href="/signup" class="btn btn-primary">Sign Up</a></li>
+
+          <% } %>
+
+          <% if(currUser){ %>
+          <li><a href="/logout" class="btn btn-danger">Logout</a></li>
+          <% } %>
         </ul>
       </div>
     </nav>

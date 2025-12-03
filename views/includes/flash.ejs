@@ -1,0 +1,46 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Flash Message</title>
+
+    <style>
+      .flash-success {
+        background: #e6fff2;
+        color: #0f8a44;
+        padding: 14px 24px;
+        border-radius: 50px;
+        font-family: "Segoe UI", sans-serif;
+        width: fit-content;
+        margin: 30px auto;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border: 1px solid #b2f0cd;
+      }
+
+      .flash-success span {
+        font-size: 22px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <% if(success && success.length > 0){ %>
+    <div class="flash-success">
+      <span>✔</span>
+      <%= success %>
+    </div>
+    <% } %>
+    <% if(error && error.length > 0){ %>
+    <div class="flash-success">
+      <span>✔</span>
+      <%= success %>
+    </div>
+    <% } %>
+  </body>
+</html>

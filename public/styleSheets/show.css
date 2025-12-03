@@ -1,263 +1,193 @@
-/* =======================================
-   GLOBAL PAGE
-======================================= */
+/* show.css */
+
+/* Basic Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
-  font-family: "Inter", sans-serif;
-  background: #f2f2f2;
-  display: flex;
-  justify-content: center;
-  padding: 40px;
-  color: #222;
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
 }
 
-/* Main container */
+/* Container */
 .container {
-  width: 750px;
-  background: #fff;
-  padding: 35px;
-  border-radius: 20px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  max-width: 900px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
-/* Page title */
+/* Title */
 .title {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
-  margin-bottom: 25px;
-  color: #111;
+  margin-bottom: 20px;
   text-align: center;
+  color: #1f2937;
 }
 
-/* =======================================
-   IMAGE BOX
-======================================= */
+/* Image */
 .img-box {
-  width: 100%;
-  height: 360px;
-  border-radius: 18px;
-  overflow: hidden;
+  text-align: center;
   margin-bottom: 25px;
-  background: #e5e5e5;
 }
 
 .img-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: 0.3s ease;
-}
-
-.img-box img:hover {
-  transform: scale(1.05);
-}
-
-/* =======================================
-   DETAILS CARD
-======================================= */
-.details-card {
-  background: #fafafa;
-  padding: 25px;
-  border-radius: 16px;
-  border: 1px solid #e6e6e6;
-  margin-bottom: 35px;
-}
-
-.description {
-  font-size: 16px;
-  line-height: 1.7;
-  color: #444;
-  margin-bottom: 20px;
-}
-
-.info p {
-  font-size: 16px;
-  margin-bottom: 10px;
-}
-
-.info strong {
-  color: #111;
-  font-weight: 600;
-}
-
-/* =======================================
-   BUTTONS
-======================================= */
-.btn-group {
-  display: flex;
-  gap: 15px;
-  margin-bottom: 40px;
-}
-
-.btn {
-  padding: 12px 22px;
+  max-width: 100%;
   border-radius: 12px;
-  font-size: 15px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: 0.2s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* Edit Button */
-.edit {
-  width: 80px;
-  height: 20px;
-  background: #111;
-  color: #fff;
+/* Details Card */
+.details-card {
+  background-color: #f9fafb;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 25px;
 }
 
-.edit:hover {
-  background: #333;
-}
-
-/* Delete Button */
-.delete {
-  background: #ff4c4c;
-  color: #fff;
-  border: none;
-}
-
-.delete:hover {
-  background: #d93636;
-}
-
-/* =======================================
-   REVIEW FORM
-======================================= */
-.review-form {
-  background: #fafafa;
-  padding: 25px;
-  border-radius: 16px;
-  border: 1px solid #e6e6e6;
-}
-
-.review-form h3 {
-  font-size: 22px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.form-group {
-  margin-bottom: 22px;
-}
-
-.review-form label {
-  font-size: 15px;
-  font-weight: 600;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.review-form input[type="range"] {
-  width: 100%;
+.details-card .description {
   margin-bottom: 15px;
 }
 
-.review-form textarea {
-  width: 100%;
-  height: 130px;
-  border-radius: 12px;
-  border: 1px solid #ccc;
-  padding: 12px;
+.details-card .info p {
+  margin-bottom: 10px;
   font-size: 15px;
-  resize: none;
-  outline: none;
 }
 
-.review-form textarea:focus {
-  border-color: #111;
+/* Buttons */
+.btn-group {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-/* Submit Button */
-.submit-btn {
-  background: #111;
-  color: #fff;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 12px;
+.btn {
+  padding: 12px 25px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
   cursor: pointer;
-  transition: 0.2s ease;
+  border: none;
 }
 
-.submit-btn:hover {
-  background: #333;
-  transform: translateY(-2px);
+.btn.edit {
+  background-color: #4f46e5;
+  color: #fff;
 }
-form {
-  background: #fafafa;
-  padding: 25px;
-  border-radius: 16px;
-  border: 1px solid #e6e6e6;
-  margin-bottom: 35px;
+
+.btn.edit:hover {
+  background-color: #6366f1;
+  transform: scale(1.05);
+}
+
+.btn.delete {
+  background-color: #ef4444;
+  color: #fff;
+}
+
+.btn.delete:hover {
+  background-color: #f87171;
+  transform: scale(1.05);
+}
+
+/* Review Form */
+form div {
+  margin-bottom: 15px;
 }
 
 form label {
-  font-size: 15px;
-  font-weight: 600;
   display: block;
-  margin-bottom: 8px;
+  margin-bottom: 5px;
+  font-weight: 600;
 }
 
 form input[type="range"] {
   width: 100%;
-  margin-bottom: 20px;
 }
 
 form textarea {
   width: 100%;
-  height: 130px;
-  border-radius: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  resize: none !important ;
   border: 1px solid #ccc;
-  padding: 12px;
-  font-size: 15px;
-  resize: none;
-  outline: none;
 }
 
-form textarea:focus {
-  border-color: #111;
-}
-
-/* Submit Button */
 form button {
-  background: #111;
+  background-color: #4f46e5;
   color: #fff;
+  padding: 10px 20px;
+  border-radius: 8px;
   border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  border-radius: 12px;
   cursor: pointer;
-  transition: 0.2s ease;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 form button:hover {
-  background: #333;
-  transform: translateY(-2px);
+  background-color: #6366f1;
+  transform: scale(1.05);
+}
+
+/* Reviews Section */
+h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
 }
 
 .card {
-  background: #fff;
-  padding: 20px;
-  border-radius: 16px;
-  border: 1px solid #e5e5e5;
-  margin-bottom: 20px;
-  transition: 0.2s ease;
-}
-
-.card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-  transform: translateY(-3px);
+  background-color: #f9fafb;
+  padding: 15px 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .card h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: #111;
+  margin-bottom: 8px;
+  color: #1f2937;
 }
 
 .card p {
-  font-size: 15px;
-  color: #555;
-  line-height: 1.5;
+  margin-bottom: 5px;
+}
+
+.card .delete {
+  margin-top: 10px;
+  background-color: #ef4444;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.card .delete:hover {
+  background-color: #f87171;
+  transform: scale(1.05);
+}
+
+/* Responsive */
+@media(max-width: 600px) {
+  .btn-group {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

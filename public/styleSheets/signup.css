@@ -1,0 +1,86 @@
+/* signup.css */
+
+/* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Body styling */
+body {
+  height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #333;
+}
+
+/* Form container */
+.form-container {
+  background-color: #fff;
+  padding: 40px 30px;
+  margin: auto;
+  margin-top: 100px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  width: 350px;
+  text-align: center;
+}
+
+/* Form heading */
+.form-container h2 {
+  margin-bottom: 25px;
+  color: #333;
+}
+
+/* Labels */
+.form-container label {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* Input fields */
+.form-container input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 14px;
+}
+
+.form-container input:focus {
+  border-color: #2575fc;
+  box-shadow: 0 0 5px rgba(37, 117, 252, 0.5);
+  outline: none;
+}
+
+/* Button styling */
+.form-container button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #2575fc;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form-container button:hover {
+  background: #6a11cb;
+  transform: scale(1.05);
+}
+
+/* Responsive tweaks */
+@media(max-width: 400px) {
+  .form-container {
+    width: 90%;
+    padding: 30px 20px;
+  }
+}
