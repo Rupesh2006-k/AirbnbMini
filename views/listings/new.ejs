@@ -12,7 +12,7 @@
     <% layout('/layouts/boilerplate') -%>
     <h1>Create a New Listing</h1>
 
-    <form autocomplete="off" action="/listings" method="post" class="form">
+    <form autocomplete="off" action="/listings" enctype="multipart/form-data" method="post" class="form">
       <label>Title</label>
       <input type="text" name="title" placeholder="Add a catchy title" />
 
@@ -22,8 +22,8 @@
         placeholder="Write something interesting..."
       ></textarea>
 
-      <label>Image Link</label>
-      <input type="text" name="image" placeholder="Enter image URL/link" />
+      <label>Upload Image </label>
+      <input type="file" name="image"  />
 
       <div class="row">
         <div class="half">

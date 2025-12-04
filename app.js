@@ -1,9 +1,9 @@
-/** @format */
-
+if (process.env.NODE_ENV !="production") {
+  require("dotenv").config();
+}
 const express = require("express");
 const app = express();
 const port = 3000;
-require("dotenv").config();
 
 const connectDB = require("./config/db");
 const path = require("path");
@@ -18,7 +18,7 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const UserModel = require("./models/user.model");
-let UserRouter = require('./routes/user.routes')
+let UserRouter = require("./routes/user.routes");
 connectDB();
 
 let sessionOptions = {
@@ -60,12 +60,9 @@ app.get("/", (req, res) => {
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
-  res.locals.currUser = req.user
+  res.locals.currUser = req.user;
   next();
 });
-
-
-
 
 app.use("/listings", listingRouter);
 app.use("/listings", reviewsRouter);

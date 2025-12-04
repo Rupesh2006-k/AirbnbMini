@@ -10,22 +10,22 @@
     <div class="container">
       <h1>Edit Your Listing</h1>
 
-      <form autocomplete="off" action="/listings/<%=leastingEdit._id%>?_method=PUT" method="post" class="form">
+      <form autocomplete="off" action="/listings/<%= listingEdit._id %>?_method=PUT" method="post" class="form">
 
         <label>Title</label>
-        <input type="text" name="title" value="<%= leastingEdit.title %>" required />
+        <input type="text" name="listing[title]" value="<%= listingEdit.title %>" required />
 
         <label>Description</label>
-        <textarea name="description" required><%= leastingEdit.description %></textarea>
+        <textarea name="listing[description]" required><%= listingEdit.description %></textarea>
 
         <label>Price</label>
-        <input type="number" name="price" value="<%= leastingEdit.price %>" required />
+        <input type="number" name="listing[price]" value="<%= listingEdit.price %>" required />
 
         <label>Location</label>
-        <input type="text" name="location" value="<%= leastingEdit.location %>" required />
+        <input type="text" name="listing[location]" value="<%= listingEdit.location %>" required />
 
         <label>Country</label>
-        <input type="text" name="country" value="<%= leastingEdit.country %>" required />
+        <input type="text" name="listing[country]" value="<%= listingEdit.country %>" required />
 
         <button type="submit" class="btn">Save Changes</button>
       </form>
