@@ -1,4 +1,7 @@
 {
+  "engines":{
+    "node": "22.15.0"
+  },
   "name": "airbnbmini",
   "version": "1.0.0",
   "main": "app.js",

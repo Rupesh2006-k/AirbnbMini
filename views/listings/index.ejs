@@ -4,15 +4,82 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="/styleSheets/style.css" />
   </head>
 
   <body>
     <% layout('/layouts/boilerplate') -%>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<div id="filter">
+  <div class="filter-item">
+    <i class="fa-solid fa-sliders"></i>
+    <span>Filters</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-house"></i>
+    <span>Rooms</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-person"></i>
+    <span>Guests</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-money-bill"></i>
+    <span>Budget</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-umbrella-beach"></i>
+    <span>Beach</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-fire-flame-curved"></i>
+    <span>Trending</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-paw"></i>
+    <span>Pets</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-mountain-sun"></i>
+    <span>Mountains</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-person-swimming"></i>
+    <span>Pools</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-chess-rook"></i>
+    <span>Castles</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-house-chimney"></i>
+    <span>A-Frame</span>
+  </div>
+
+  <div class="filter-item">
+    <i class="fa-solid fa-tree"></i>
+    <span>Cabins</span>
+  </div>
+</div>
+
+
+
     <div class="cards-container">
       <% for (let elem of listing) { %>
       <div class="card">
-        <img src="<%= elem.image %>" alt="<%= elem.title %>" />
+        <img src="<%= elem.image.url%>" alt="<%= elem.title %>" />
 
         <div class="card-content">
           <h2><%= elem.title %></h2>

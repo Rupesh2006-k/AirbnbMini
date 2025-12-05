@@ -1,0 +1,2 @@
+mongodb+srv://devrupesh2006_db_user:<db_password>@cluster0.l2s574z.mongodb.net/?appName=Cluster0
+mongodb+srv://devrupesh2006_db_user:pOA3ngXdMRuh4iGe@cluster0.l2s574z.mongodb.net/?appName=Cluster0

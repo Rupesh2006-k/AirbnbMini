@@ -54,3 +54,43 @@ html{
 .view-btn:hover {
   background: #333;
 }
+#filter {
+  display: flex;
+  gap: 20px;
+  padding: 15px 20px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  width: fit-content;
+  align-items: center;
+  font-family: Inter, sans-serif;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 30px;
+  border: 1px solid #ececec;
+  background: #fafafa;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.filter-item i {
+  font-size: 16px;
+  color: #ff385c; /* Airbnb pink vibe */
+}
+
+.filter-item span {
+  font-size: 14px;
+  color: #333;
+}
+
+.filter-item:hover {
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+

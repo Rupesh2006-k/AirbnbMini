@@ -1,5 +1,3 @@
-/** @format */
-
 const express = require("express");
 const router = express.Router();
 
@@ -8,9 +6,11 @@ const isOwner = require("../middlewares/isOwner.middlewares");
 const wrapAsync = require("../utils/wrapAsync");
 const ExpressError = require("../utils/ExpressError");
 const { ListingSchema } = require("../schema");
+
 let multer = require("multer");
 let { cloudinary, storage } = require("../config/cloud.config");
 let upload = multer({ storage });
+
 const {
   listingIndexControllers,
   listingNewFormControllers,
@@ -22,6 +22,7 @@ const {
 } = require("../controllers/listings.controllers");
 
 // ------------------ VALIDATION ---------------------
+
 const validateListing = (req, res, next) => {
   const { error } = ListingSchema.validate(req.body);
   if (error) {
@@ -37,15 +38,13 @@ const validateListing = (req, res, next) => {
 router
   .route("/")
   .get(wrapAsync(listingIndexControllers))
-  .post(upload.single("image"), (req, res) => {
-    console.log(req.file);
-    res.send("req.file");
-  });
-// .post(
-//   isLoggedIn,
-//   validateListing,
-//   wrapAsync(listingCreateListingControllers)
-// );
+  .post(
+    isLoggedIn,
+    upload.single("image"),
+    
+    validateListing,
+    wrapAsync(listingCreateListingControllers)
+  );
 
 // NEW
 router.get("/new", isLoggedIn, listingNewFormControllers);
@@ -56,22 +55,19 @@ router
   .get(wrapAsync(listingShowControllers))
   .put(
     isLoggedIn,
-    isOwner, // must come BEFORE validation
+    isOwner,
+    upload.single("image"),
     validateListing,
-    wrapAsync(listingUpdateControllers),
+    wrapAsync(listingUpdateControllers)
   )
-  .delete(
-    isLoggedIn,
-    isOwner, // also protect delete
-    wrapAsync(listingDeleteControllers),
-  );
+  .delete(isLoggedIn, isOwner, wrapAsync(listingDeleteControllers));
 
 // EDIT PAGE
 router.get(
   "/:id/edit",
   isLoggedIn,
-  isOwner, // protection added!
-  wrapAsync(listingEditListingControllers),
+  isOwner,
+  wrapAsync(listingEditListingControllers)
 );
 
 module.exports = router;

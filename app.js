@@ -1,4 +1,6 @@
-if (process.env.NODE_ENV !="production") {
+/** @format */
+
+if (process.env.NODE_ENV != "production") {
   require("dotenv").config();
 }
 const express = require("express");
@@ -14,6 +16,7 @@ const listingRouter = require("./routes/listing.routes");
 const reviewsRouter = require("./routes/reviews.routes");
 const cookieParser = require("cookie-parser");
 let session = require("express-session");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -21,7 +24,16 @@ const UserModel = require("./models/user.model");
 let UserRouter = require("./routes/user.routes");
 connectDB();
 
+let store = MongoStore.create({
+  mongoUrl: process.env.ATLASDB_URL,
+  crypto: {
+    secret: "kuchKhasBatHai",
+  },
+  touchAfter: 24 * 3600,
+});
+
 let sessionOptions = {
+  store,
   secret: "kuchKhasBatHai",
   resave: false,
   saveUninitialized: true,
@@ -31,6 +43,11 @@ let sessionOptions = {
     httpOnly: true,
   },
 };
+
+
+store.on('error' , (err)=>{
+  console.log("session error hai")
+})
 // Middleware
 
 app.engine("ejs", ejsMate);

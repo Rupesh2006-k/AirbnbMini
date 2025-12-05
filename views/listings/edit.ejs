@@ -7,28 +7,83 @@
     <link rel="stylesheet" href="/styleSheets/edit.css" />
   </head>
   <body>
+      <%- include('../includes/navbar.ejs') %>
     <div class="container">
       <h1>Edit Your Listing</h1>
+<form
+  autocomplete="off"
+  action="/listings/<%= listingEdit._id %>?_method=PUT"
+  method="post"
+  enctype="multipart/form-data"
+  class="form"
+>
+  <label>Title</label>
+  <input
+    type="text"
+    name="title"
+    value="<%= listingEdit.title %>"
+  />
 
-      <form autocomplete="off" action="/listings/<%= listingEdit._id %>?_method=PUT" method="post" class="form">
+  <label>Description</label>
+  <textarea name="description"><%= listingEdit.description %></textarea>
 
-        <label>Title</label>
-        <input type="text" name="listing[title]" value="<%= listingEdit.title %>" required />
+  <!-- Existing Image Preview -->
+  <label>Current Image</label>
+  <img
+    id="currentImage"
+    src="<%= listingEdit.image.url %>"
+    alt="Current Image"
+    width="200"
+    style="margin-bottom: 10px; border-radius: 6px;"
+  />
 
-        <label>Description</label>
-        <textarea name="listing[description]" required><%= listingEdit.description %></textarea>
+  <label>Upload New Image (Optional)</label>
+  <input type="file" name="image" id="imageInput" />
 
-        <label>Price</label>
-        <input type="number" name="listing[price]" value="<%= listingEdit.price %>" required />
+  <!-- New Preview -->
+  <img
+    id="newPreview"
+    style="display: none; margin-top: 10px; width: 200px; border-radius: 6px;"
+  />
 
-        <label>Location</label>
-        <input type="text" name="listing[location]" value="<%= listingEdit.location %>" required />
+  <label>Price</label>
+  <input
+    type="number"
+    name="price"
+    value="<%= listingEdit.price %>"
+  />
 
-        <label>Country</label>
-        <input type="text" name="listing[country]" value="<%= listingEdit.country %>" required />
+  <label>Country</label>
+  <input
+    type="text"
+    name="country"
+    value="<%= listingEdit.country %>"
+  />
 
-        <button type="submit" class="btn">Save Changes</button>
-      </form>
+  <label>Location</label>
+  <input
+    type="text"
+    name="location"
+    value="<%= listingEdit.location %>"
+  />
+
+  <button type="submit" class="btn">Save Changes</button>
+</form>
+
+<script>
+  const imageInput = document.getElementById("imageInput");
+  const newPreview = document.getElementById("newPreview");
+
+  imageInput.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      newPreview.src = URL.createObjectURL(file);
+      newPreview.style.display = "block";
+    }
+  });
+</script>
+ <%- include('../includes/footer.ejs') %>
     </div>
   </body>
 </html>
